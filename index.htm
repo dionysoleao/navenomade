@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLDV Nômade</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/tw-utils.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://vjs.zencdn.net/8.5.2/video-js.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/videojs-vjstranscribe@1.0.1/dist/videojs-vjstranscribe.css">
+</head>
+<body class="bg-orange-100">
+    <div class="wide-wrapper mx-auto">
+        <!-- <header class="my-8">
+
+        </header> -->
+        </div>
+        <main>
+            <div class="relative items-center bg-orange-400">
+                <div class="bg-desert"></div>
+                <div class="wide-wrapper relative z-10 flex w-full items-center justify-between py-8">
+                    <div class="logo w-32">
+                        <img style="filter: invert(1); "
+                            src="https://www.escolanomade.org/wp-content/uploads/2022/07/logo-escola-nomade.png" alt="" srcset="">
+                    </div>
+                    <h1 class="title text-4xl">Espinoza - A Ética e a Clínica</h1>
+                </div>
+                <div>
+            </div>
+            <!-- <h2 class="relative z-10 flex w-full justify-between bg-orange-300 px-3 py-2 text-lg">
+                <div class="wide-wrapper flex w-full justify-between">
+                    <div class="flex items-center gap-7">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1.3em"
+                            viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. 
+                            <path fill="black"
+                                d="M64 144a48 48 0 1 0 0-96 48 48 0 1 0 0 96zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM64 464a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm48-208a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z" />
+                        </svg>
+                        <span>09/10/2023</span>
+                        
+                    </div>
+                    <div class="text-2xl">Aula 34 - Proposições 24 a 30</div>
+                    
+                </div>
+                
+            </h2> -->
+                
+            </div>
+            <div class="wide-wrapper">
+                <div class="flex gap-8">
+                    <aside>
+                        <nav>
+
+                            <div class="classes hidden">
+                                <ul>
+                                    <li><a href="#">Aula 1</a></li>
+                                    <li><a href="#" onclick="jumpToTime(60)">Aula 2</a></li>
+                                    <li><a href="#">Aula 3</a></li>
+                                </ul>
+                            </div>
+                            <div class="index">
+
+                                <ul>
+                                    <li class="mt-6">
+                                        <h2 class="mb-4 font-bold">Distribuidoras de energia elétrica</h2>
+                                        <ul>
+                                            <li><a href="#" onclick="jumpToTime(306.354)">Discussão sobre queda prolongada de energia no Rio de Janeiro e críticas à distribuidora local.</a></li>
+                                            <li><a href="#" onclick="jumpToTime(305.960)">Surpresa com apagão em São Paulo, considerada locomotiva econômica do Brasil, e impactos de um possível apagão na cidade</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="mt-4">
+                                        <h2 class="mb-4 font-bold">A determinação da ação humana</h2>
+                                        <ul>
+                                            <li><a href="#" onclick="jumpToTime(120)">Leitura da proposição 26 de Spinoza que diz que tudo que é determinado a
+                                                    operar de alguma maneira foi determinado por
+                                                    Deus. Isso elimina a noção de livre-arbítrio.</a>
+                                            </li>
+                                            <li><a href="#"  onclick="jumpToTime(160)">Discussão sobre como a determinação das ações por Deus nos dá o direito à
+                                                    inocência, já que somos inocentes diante da
+                                                    necessidade da ação humana.</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="mt-4">
+                                        <h2 class="mb-4 font-bold">Proposição 28 de Espinoza</h2>
+                                        <ul>
+                                            <li><a href="#">Apresentação da proposição 28 que diz que qualquer modo singular só pode
+                                                    existir se for determinado por outro modo
+                                                    singular e assim sucessivamente até o infinito.</a>
+                                            </li>
+                                            <li><a href="#">Exemplo dado para ilustrar a cadeia infinita de causas entre modos
+                                                    singulares como a relação entre pais e filhos que se
+                                                    estende ao infinito.</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <div class="video"></div>
+                    </aside>
+                    <div class="video mt-6 w-full">
+                        <style>
+                            .video-js {
+                                position: relative;
+                                padding-bottom: 56.25%;
+                                height: 0;
+                                overflow: hidden;
+                                max-width: 100%;
+                            }
+
+                            .embed-container iframe,
+                            .embed-container object,
+                            .embed-container embed {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                            }
+                        </style>
+                        <div class="">
+                            <div class="mb-3 flex w-full items-center justify-end text-2xl" style="gap: 1rem;">
+                                <div class="flex justify-end gap-4">
+                                    Aula 34 - Proposições 24 a 30
+                                    <div style="font-size: 16px;">[09/10/2023] </div>
+                                </div>
+                            </div>
+                            <div>
+                                <video id="vjstranscribe-demo" class="video-js vjs w-full" controls preload="auto" width="640"
+                                    height="264" poster="http://vjs.zencdn.net/v/oceans.png">
+                                    <source src="https://live.staticflickr.com/video/53684050242/dc0ee6f803/orig.mp4?s=eyJpIjo1MzY4NDA1MDI0MiwiZSI6MTcxNDMzOTk4NiwicyI6IjhhMTU1MjBhYTc3ZmI2NGU4YTY2MGE1MTg0N2E1YjhjNTE4OWQ1ODgiLCJ2IjoxfQ" type='video/mp4'>
+                                    <track kind="subtitles" src="subs.vtt" srclang="en" label="English" default="true">
+                                    </track>
+                                    <track kind="subtitles" src="https://raw.githubusercontent.com/videojs/video.js/main/docs/examples/elephantsdream/captions.sv.vtt" srclang="sv" label="Swedish" default="true">
+                                    </track>
+                                    <p class="vjs-no-js">
+                                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                                    </p>
+                                </video>
+                                </div>
+                                <div>
+                                <div class="demo-transcribe flex">
+                                    <div id="vjs-transcribe-selector"></div>
+                                    <div id="vjs-transcribe-search"></div>
+                                    <div id="vjs-transcribe-download"></div>
+                                </div>
+                                <div id="vjs-transcribe"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
+    <script src="https://unpkg.com/videojs-vjstranscribe@1.0.1/dist/videojs-vjstranscribe.js"></script>
+    <script>
+        var player = videojs(document.querySelector('.video-js'), {
+                plugins: {
+                    vjstranscribe: {
+                        pip: false,
+                        mode:'prose',
+                        selector: false,
+                        download: false,
+                        copy: false,
+                    }
+                }
+            });
+            
+                function jumpToTime(time) {
+                    player.currentTime(time);
+                    player.play();
+                }
+            document.addEventListener('DOMContentLoaded', function() {
+
+            // Carregar a transcrição automaticamente ao iniciar o vídeo
+            player.ready(function() {
+                document.querySelector('.vjs-transcribe .vjs-transcribe-btn').click();
+                
+            });
+            
+                videojs(document.querySelector('.video-js')).disablePictureInPicture();
+
+            });
+    
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

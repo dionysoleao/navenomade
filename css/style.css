@@ -1,0 +1,61 @@
+.wide-wrapper{
+    max-width:1440px;
+    margin:0 auto;
+}
+
+aside{
+    width: 33.3333%;
+}
+
+.yt-video{
+    position: absolute;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    width: 100%;
+    height:max-content
+}
+
+.logo{
+    width:120px
+}
+
+.nav-switch{
+    width:2rem;
+    height: 2rem;
+    margin: 4px;
+    background-image:url("../img/classes-icon.png");
+    background-size: contain;
+}
+
+.index-icon{
+    background-image: url("../img/index-icon.png");
+}
+
+
+.index ul li ul li a{
+    display: block;
+    margin-bottom:.5rem;
+    border-radius: .625rem;
+    box-shadow: 0 1px 1px rgba(9, 30, 66, .25);
+    background-color:#fff7ed;
+    padding:14px
+}
+
+.bg-desert{
+    position: absolute;
+    background-image: url('../img/texture.jpg');
+    transform: rotateY(180deg);
+    top:0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-size: cover;
+    opacity: 0.4;
+    background-position-x: left;
+}
+
+.title{
+    font-family:"Montserrat";
+}
