@@ -233,7 +233,7 @@
       this.$searchInput = document.createElement("input");
       this.$searchInput.setAttribute("role", "searchbox");
       this.$searchInput.setAttribute("type", "search");
-      this.$searchInput.setAttribute("placeholder", "Search");
+      this.$searchInput.setAttribute("placeholder", "Buscar");
       this.$searchInput.addEventListener("keyup", this.searchStart.bind(this));
       this.$searchInput.addEventListener("focus", this.searchStart.bind(this));
       this.$search.appendChild(this.$searchInput);
