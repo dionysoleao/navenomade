@@ -9,484 +9,95 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/tw-utils.css">
     <link rel="stylesheet" href="css/style.css">
-<style>
-
-    .menu-index ul li ul li a {
-    display: block;
-    margin-bottom: .5rem;
-    border-radius: .625rem;
-    box-shadow: 0 1px 1px rgba(9, 30, 66, .25);
-    background-color: #e4e4e4;
-    color:black;
-    padding: 14px;
-    }
-
-    .vjs-transcribe-body {
-    border: none !important;
-}
-
-button.vjs-transcribe-search-result, .vjs-transcribe-search-result {
-
-    background: #414141;
-}
-
-.vjs-transcribe-search-results {
-    background: #414141;
-    border: none;
-
-}
-
-button.vjs-transcribe-search-result:hover, button.vjs-transcribe-search-result:focus {
-    background: #1e1e1e;
-}
-
-.vjs-transcribe-body-prose .vjs-transcribe-cueline {
-    padding: 0 5px;
-    border-radius:5px;
-}
-
-    input[type="search"] {
-    background: #000000dd;
-    opacity: 56%;
-    border-radius: 6px;
-    margin: 10px;
-    margin-top: 10px;
-    padding: 5px 10px;
-}
-
-.vjs-transcribe-body::-webkit-scrollbar-track, .menu-index::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #414141;
-}
-
-.vjs-transcribe-body::-webkit-scrollbar, .menu-index::-webkit-scrollbar
-{
-	width: 12px;
-	background-color: #414141;
-    	border-radius: 10px;
-}
-
-.vjs-transcribe-body::-webkit-scrollbar-thumb, .menu-index::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #1a1a1a;
-}   
-
-
-    .menu-index > ul{
-        width:70%;
-        margin:0 auto;
-    }
-
-    .menu-index {
-        height: 100%;
-        overflow: auto;
-    }
-
-    .vjs-transcribe-body {
-        height: calc(100% - 54px);
-        padding: 0;
-    }
-html,
-body {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  border: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
-  box-sizing: inherit;
-}
-
-#app {
-  width: 100%;
-  height: 100%;
-
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.resizable-x,
-.resizable-y {
-  display: flex;
-  overflow: hidden;
-}
-
-.resizable-x {
-  height: 100%;
-}
-
-.resizable-y {
-  flex-direction: column;
-}
-
-.resizer-x,
-.resizer-y {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: black;
-  padding: 4px;
-}
-
-.resizer-x {
-  z-index: 2;
-  cursor: col-resize;
-}
-.resizer-x::before,
-.resizer-x::after {
-  content: "";
-  width: 2px;
-  height: 16px;
-  margin: 2px;
-  background: lightgray;
-}
-
-.resizer-y {
-  z-index: 1;
-  cursor: row-resize;
-  flex-direction: column;
-}
-.resizer-y::before,
-.resizer-y::after {
-  content: "";
-  width: 16px;
-  height: 2px;
-  margin: 2px;
-  background: lightgray;
-}
-
-.div0,
-.div1,
-.div2 {
-  overflow: hidden;
-}
-
-
-.div2 {
-  background: #363636;
-  color: white;
-}
-
-.div0 p,
-.div1 p,
-.div2 p {
-  font-size: 2rem;
-  margin-left: 1em;
-  text-transform: uppercase;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-
-</style>
 </head>
 <body>
-<div id="app">
-    <div class="resizable-x">
-        <div class="div0" style="flex: 0%; width: 0;">
-            <p>div 0</p>
-        </div>
-        <div class="resizer-x" style="display:none"></div>
-        <div class="resizable-y" style="flex: 100%;">
-            <div class="div1" style="flex: 33.33%;">
-                <video style="height:100%; width:100%"id="vjstranscribe-demo" class="video-js vjs w-full" controls preload="auto" width="640" height="264">
-                    <source
-                        src="https://player.vimeo.com/progressive_redirect/playback/929728759/rendition/360p/file.mp4?loc=external&signature=3ba06e6efd8754acfd6f3b015d941e233bdcc52bddb71f7517befa9293a41552"
-                        type='video/mp4'>
-                    <track kind="subtitles" src="asd.vtt" srclang="en" label="English" default="true">
-                    </track>
-                    <p class="vjs-no-js">
-                        To view this video please enable JavaScript, and consider upgrading to a web browser that
-                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                    </p>
-                </video>
-            </div>
-            <div class="resizer-y"></div>
-            <div class="div2" style="flex: 66.66%;">
-                <div style="height:100%" class="transcrib hidden">
-                    <div class="demo-transcribe flex">
-                        <div id="vjs-transcribe-selector"></div>
-                        <div id="vjs-transcribe-search"></div>
-                        <div id="vjs-transcribe-download"></div>
-                    </div>
-                    <div style="height:100%" id="vjs-transcribe"></div>
-                </div>
-                <!-- Menu Index -->
-                <div class="menu-index">
-                    <ul>
-                        <li class="mt-6">
-                            <h2 class="mb-4 font-bold">Proposição 9 de Espinosa</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(189)">Apresentação da Proposição 9 que trata da causalidade das
-                                        ideias e como Deus é a causa das ideias singulares existentes em ato. 03:09</a></li>
-                                <li><a href="#" onclick="jumpToTime(543)">Explicação de que a Proposição 9 busca explicar qual é a causa
-                                        da mente humana, sendo ela uma ideia singular existente em ato. 09:03</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Natureza das ideias segundo Espinosa</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(337)">Uma alma é uma ideia para Espinosa e toda ideia pode ser
-                                        considerada mente ou alma. 05:37</a></li>
-                                <li><a href="#" onclick="jumpToTime(362)">Uma ideia singular é aquela que existe fora do atributo
-                                        pensamento, tanto como essência quanto como existência singular finita. 06:02</a></li>
-                                <li><a href="#" onclick="jumpToTime(1151)">Para Espinosa, até um átomo ou molécula tem mente, pois tudo
-                                        é animado em sua filosofia. 19:11</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Demonstração da Proposição 9</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(616)">Início da demonstração da Proposição 9 que relaciona as ideias
-                                        com os atributos e modos do pensamento. 10:16</a></li>
-                                <li><a href="#" onclick="jumpToTime(826)">Conclusão da demonstração mostrando a relação entre a ordem
-                                        das ideias e das causas segundo outras proposições de Espinosa. 13:46</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Corolário da Proposição 9</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(995)">Leitura do corolário que diz respeito ao conhecimento em Deus
-                                        do que acontece nos objetos das ideias. 16:35</a></li>
-                                <li><a href="#" onclick="jumpToTime(1080)">Explicação de que o objeto de uma ideia é aquilo que ela
-                                        pensa e que a ideia percebe modificações nesse objeto. 18:00</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A substância única e seus atributos</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(1202)">Discute que tudo pertence à mesma substância única,
-                                        compreendida sob diferentes atributos. 20:02</a></li>
-                                <li><a href="#" onclick="jumpToTime(1236)">Explica que pensamento e extensão são expressões da mesma
-                                        substância única. 20:36</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A relação entre ideias e coisas</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(1466)">Revisa a proposição 7 que diz que a ordem das ideias é igual
-                                        à ordem das coisas. 24:26</a></li>
-                                <li><a href="#" onclick="jumpToTime(1501)">Explica que a ideia da causa produz a ideia do efeito, assim
-                                        como a causa produz o efeito. 25:01</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Ideias existentes e não existentes</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(2085)">Revisa a proposição 8 sobre ideias de coisas não existentes
-                                        contidas nos atributos. 34:45</a></li>
-                                <li><a href="#" onclick="jumpToTime(2239)">Apresenta a proposição 9 sobre ideias de coisas existentes
-                                        causadas por outras coisas existentes. 37:19</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Nossa eternidade</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(2357)">Pergunta sobre nossa eternidade e responde que está em nossa
-                                        constituição e como ideia no atributo quando morremos. 39:17</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A percepção de Deus</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(3338)">Deus percebe na verdade através de nós, pois ele é afetado
-                                        por nós na medida que ele constitui a nossa mente. 55:38</a></li>
-                                <li><a href="#" onclick="jumpToTime(NaN)">Deus percebe através de nós. Ele chama de Deus, mas somos nós.
-                                        Deus através de nós. 56:04</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A ordem e conexão das ideias e das coisas</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(3422)">O conhecimento do que acontece em algum objeto singular
-                                        estará em Deus apenas enquanto tem a ideia desse objeto. 57:02</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A ideia de afecção</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(3468)">Para toda afecção no corpo, há uma ideia de afecção na mente.
-                                        57:48</a></li>
-                                <li><a href="#" onclick="jumpToTime(3499)">A ideia de afecção é inadequada pois Deus tem ideia de outras
-                                        mentes e corpos além da nossa. 58:19</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A essência do ser humano</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(3526)">A proposição 10 afirma que a essência do ser humano não
-                                        pertence ao ser da substância, ou seja, a substância não constitui a forma do ser humano.
-                                        58:46</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A substância segundo Espinosa</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(3945)">Discussão sobre como para Espinosa a mente não é uma
-                                        substância e sim um modo, ao contrário de Descartes que via a alma como substância. 01:05:45</a>
-                                </li>
-                                <li><a href="#" onclick="jumpToTime(3971)">Conclusão de que para Espinosa há apenas uma substância,
-                                        diferentemente da tradição que admitia várias substâncias. 01:06:11</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A essência do ser humano</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(4108)">Discussão sobre como a mente e o corpo pertencem à essência
-                                        do ser humano segundo Espinosa, ao contrário da tradição que diz que a mente continua existindo
-                                        após a morte do corpo. 01:08:28</a></li>
-                                <li><a href="#" onclick="jumpToTime(4260)">Conclusão de que a essência do ser humano é constituída por
-                                        uma mente e um corpo, segundo as definições de Espinosa, ao contrário do que se pensava.
-                                        01:11:00</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A ordem do filosofar em Espinosa</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(4740)">Espinosa critica a tradição por não observar a ordem do
-                                        filosofar, começando pela natureza divina e não pelas coisas criadas. 01:19:00</a></li>
-                                <li><a href="#" onclick="jumpToTime(4799)">Conclusão de que para Espinosa a ordem correta é começar pela
-                                        causa, que é Deus, e não pelo efeito ou pelas coisas criadas. 01:19:59</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Próximos passos</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(5704)">Após a proposição 13, vários lemas e definições serão feitos
-                                        sobre o que é corpo para Espinoza. 01:35:04</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A essência da mente humana</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(NaN)">A mente humana é constituída pela ideia de uma coisa singular
-                                        que existe em ato. Ainda não se sabe o que é essa coisa. 01:37:07</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A coisa singular que constitui a mente humana é o corpo</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(5880)">Embora ainda não tenha sido explicitamente dito, a coisa
-                                        singular que existe em ato e constitui a mente humana é o próprio corpo da pessoa. 01:38:00</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A ordem dos modos de pensar</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(5945)">Os modos de pensar como desejo e alegria pressupõem um
-                                        objeto, mas a ideia é anterior sem precisar de um objeto. 01:39:05</a></li>
-                                <li><a href="#" onclick="jumpToTime(5981)">A nossa mente é a ideia, que não precisa do objeto, embora só
-                                        exista com o corpo. 01:39:41</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Oxioma 3 de Espinosa</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(6046)">Apresentação do Oxioma 3 de Espinosa que diz que modos de
-                                        pensar como amor e desejo dependem da ideia da coisa amada ou desejada, sendo a ideia anterior.
-                                        01:40:46</a></li>
-                                <li><a href="#" onclick="jumpToTime(6061)">Discussão sobre como a ideia pode existir sem os outros modos
-                                        de pensar, sendo portanto anterior. 01:41:01</a></li>
-                                <li><a href="#" onclick="jumpToTime(6067)">Conclusão de que a ideia é anterior aos outros modos de
-                                        pensar como amor e desejo. 01:41:07</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A ideia como constituinte da mente humana</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(6069)">Discussão sobre como a ideia é o objeto pensado que é a nossa
-                                        própria mente. 01:41:09</a></li>
-                                <li><a href="#" onclick="jumpToTime(6074)">Conclusão de que amor, desejo e outros modos de pensar
-                                        dependem da nossa mente. 01:41:14</a></li>
-                                <li><a href="#" onclick="jumpToTime(6086)">Citação do Oxioma de que a ideia de uma coisa singular
-                                        existente constitui o ser atual da mente humana. 01:41:26</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Ideia inadequada e percepção parcial</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(6471)">Introdução do conceito de ideia inadequada na percepção de
-                                        Deus através da mente humana. 01:47:51</a></li>
-                                <li><a href="#" onclick="jumpToTime(6545)">Explicação de que a mente humana só percebe efeitos e não
-                                        conhece a coisa em si. 01:49:05</a></li>
-                                <li><a href="#" onclick="jumpToTime(6922)">Conclusão de que a mente humana percebe de modo parcial e
-                                        inadequado. 01:55:22</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">A percepção humana como percepção de Deus</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(6602)">Explicação de que quando dizemos que a mente humana percebe
-                                        algo na verdade estamos dizendo que Deus percebe através da constituição da nossa mente.
-                                        01:50:02</a></li>
-                                <li><a href="#" onclick="jumpToTime(6610)">Reforço do conceito de que é Deus percebendo através da nossa
-                                        mente. 01:50:10</a></li>
-                                <li><a href="#" onclick="jumpToTime(6626)">Referência ao chamado "terceiro olho" através do qual Deus
-                                        percebe na nossa mente. 01:50:26</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Proposição 12 de Espinosa</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(7081)">Leitura da Proposição 12 que diz que a mente percebe tudo o
-                                        que acontece no objeto da ideia que a constitui. 01:58:01</a></li>
-                                <li><a href="#" onclick="jumpToTime(7147)">Discussão sobre como a mente na verdade só percebe as
-                                        afecções do corpo, ou seja, os efeitos e não as causas. 01:59:07</a></li>
-                                <li><a href="#" onclick="jumpToTime(7198)">Conclusão de que enquanto a mente tiver ideias de afecções
-                                        terá ideias inadequadas de efeitos e não causas. 01:59:58</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Discussão sobre o pensamento expressivo e a percepção</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(7229)">Discussão sobre como o pensamento é capaz de unir a essência
-                                        com a substância. 02:00:29</a></li>
-                                <li><a href="#" onclick="jumpToTime(7265)">Discussão sobre como a mente percebe as coisas de forma
-                                        intrínseca. 02:01:05</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Proposição 12 de Espinosa - percepção da mente humana</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(7311)">Leitura da Proposição 12 de Espinosa sobre a percepção da
-                                        mente humana. 02:01:51</a></li>
-                                <li><a href="#" onclick="jumpToTime(7334)">Discussão sobre como nada pode acontecer no corpo sem ser
-                                        percebido pela mente. 02:02:14</a></li>
-                            </ul>
-                        </li>
-                        <li class="mt-4">
-                            <h2 class="mb-4 font-bold">Próximos passos - Proposição 13</h2>
-                            <ul>
-                                <li><a href="#" onclick="jumpToTime(7595)">Menção à Proposição 13 que será abordada no próximo encontro.
-                                        02:06:35</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+<div id="app"><div class="resizable-x">
 
-            </div>
+
+    <div class="resizable-y" style="flex: 100%;">
+        <div class="div1" style="flex: 33.33%;">
+            <video style="height:100%; width:100%"id="vjstranscribe-demo" class="video-js vjs w-full" controls preload="auto" width="640" height="264">
+                <source     
+                src="https://player.vimeo.com/external/233761346.m3u8?s=198fe516d638c2bed46789547f857a537dd8e3b1&logging=false"
+                 type="application/x-mpegURL">
+                <track kind="subtitles" src="assets/formacao/3.vtt" srclang="pt-BR" label="Português" default="true">
+                </track>
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
         </div>
-    </div>
+        <div class="resizer-y"></div>
+        <div class="div2" style="flex: 66.66%;">
+            <div style="height:100%" class="transcrib hidden">
+                <div class="demo-transcribe flex">
+                    <div id="vjs-transcribe-selector"></div>
+                    <div id="vjs-transcribe-search"></div>
+                    <div id="vjs-transcribe-download"></div>
+                </div>
+                <div style="height:100%" id="vjs-transcribe"></div>
+            </div>
+            <!-- Menu Index -->
+            <div class="menu-index">
+                <ul><li class="mt-6">
+                    <h2 class="mb-4 font-bold">Introdução ao desejo constituído pela falta</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(12)">Apresentação do tema da aula, focando na questão crítica e genealógica do desejo constituído pela falta. 00:12</a></li><li><a href="#" onclick="jumpToTime(47)">Fazer a genealogia desse tipo de desejo para entender que ele não é simplesmente algo que carece de um objeto. 00:47</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">A ficção na constituição do desejo</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(75)">O desejo constituído pela falta não é uma mera ficção. 01:15</a></li><li><a href="#" onclick="jumpToTime(114)">A ficção produz um efeito real no nosso desejo, potência e força de existir, embora seja uma ficção. 01:54</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">O limiar e o limite da existência</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(134)">Algo faz com que sejamos rebaixados ao adentrarmos um limiar que impediria a retomada dinâmica da vida. 02:14</a></li><li><a href="#" onclick="jumpToTime(171)">Algo impede a retomada a partir de um certo limite ou limiar. 02:51</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">O buraco negro subjetivo</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(214)">Menção ao conceito de buraco negro aplicado à subjetividade por Deleuze e Guattari. 03:34</a></li><li><a href="#" onclick="jumpToTime(232)">O buraco negro sugaria a própria luz, impedindo expressividade e efetuação dentro de nós. 03:52</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">A máquina de produção do sujeito</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(517)">O buraco negro e o muro branco compõem uma máquina de produção do rosto e da força de rostificação. 08:37</a></li><li><a href="#" onclick="jumpToTime(546)">Uma das faces da máquina é a subjetividade e o modo subjetivo de usar a linguagem. 09:06</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">O muro branco e a significação</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(597)">O buraco negro seria a negação do horizonte do dentro e o muro branco a negação do horizonte do fora. 09:57</a></li><li><a href="#" onclick="jumpToTime(622)">O muro branco seria uma opacidade onde se escrevem significantes e significados. 10:22</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">A esquizofrenia como produção social</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(861)">A esquizofrenia é sempre tratada a partir do eu, como dissociação. 14:21</a></li><li><a href="#" onclick="jumpToTime(1134)">A causa da esquizofrenia está em uma máquina social de produção que faz paralisar os processos. 18:54</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">O materialismo do desejo</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(1167)">Defesa de um autêntico materialismo para entender o desejo. 19:27</a></li><li><a href="#" onclick="jumpToTime(1191)">Entender o desejo nos processos que antecedem o buraco e vão além do muro. 19:51</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">Emergência do buraco subjetivo</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(1359)">Discussão sobre focar na emergência do buraco subjetivo e na genealogia do buraco através de algo que não consegue digerir ou expelir. 22:39</a></li><li><a href="#" onclick="jumpToTime(1703)">O que é exatamente o acontecido que toma o lugar da potência de acontecer? Algo que não consegue digerir e também expelir. 28:23</a></li><li><a href="#" onclick="jumpToTime(2020)">Resumo do que é o buraco e como emerge através de algo que não consegue digerir, expelir ou isolar. 33:40</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">Forças sociais que dificultam a isolação</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(2106)">Forças sociais como família e classes podem ofuscar a capacidade de isolação. 35:06</a></li><li><a href="#" onclick="jumpToTime(2117)">Há um reforço cotidiano dessas marcas através do modo existencial de cada um. 35:17</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">Origem da interpretação do eu e do mundo</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(2306)">Um estado externo modifica as forças internas e origina uma nova interpretação de si e do mundo. 38:26</a></li><li><a href="#" onclick="jumpToTime(2330)">Ganha-se uma nova lente de percepção da realidade através desse estado. 38:50</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">Origem do ressentimento</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(2421)">Fala sobre a origem do ressentimento e a necessidade de entender a causa afetiva de um mau jeito na existência que leva ao mau uso do que nos acontece. 40:21</a></li><li><a href="#" onclick="jumpToTime(2460)">Explica que quando algo acontece e não conseguimos devolver, expulsar ou digerir, também não conseguimos isolar, e assim acabamos sendo usados por isso. 41:00</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">Efeitos do ressentimento</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(2500)">Explica como o ressentimento reduz de uma potência de criar a realidade a um estado de impotência preso ao acontecido. 41:40</a></li><li><a href="#" onclick="jumpToTime(2942)">Comenta que sem o ideal, o impotente não concebe a vida, e o ideal surge como defesa do impotente. 49:02</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">Desejo intensivo x desejo intencional</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(3204)">Explica a diferença entre desejo intensivo que não visa apenas direção ou tempo, e desejo intencional que emerge sobrepondo-se ao intensivo. 53:24</a></li><li><a href="#" onclick="jumpToTime(3445)">Comenta que o desejo intencional depende sempre de apoio exterior, enquanto o intensivo tem comando no acontecimento. 57:25</a></li></ul>
+                </li><li class="mt-4">
+                    <h2 class="mb-4 font-bold">Próximos passos</h2>
+                    <ul><li><a href="#" onclick="jumpToTime(3490)">Na próxima aula, tratará desejo intensivo e desejo intencional, e desejo como processo de produção e não substância, coincidindo com o inconsciente. 58:10</a></li></ul>
+                </li></ul>
+            </div>
+
+        </div>
+    </div></div>
 </div>
 
-<script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
+<script src="vjs.js"></script>
+<script src="https://unpkg.com/@videojs/http-streaming@3.10.0/dist/videojs-http-streaming.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/videojs-contrib-quality-levels@4.1.0/dist/videojs-contrib-quality-levels.min.js"></script>
 <script src="transcribe.js"></script>
 <script>
+
     var player = videojs(document.querySelector('.video-js'), {
         plugins: {
             vjstranscribe: {
@@ -497,19 +108,100 @@ body {
                 copy: false,
             }
         }
+    }, () => {
+  player.one("loadedmetadata", () => {
+    let qualities = player.tech().vhs.representations();
+    createQualityButtons({
+      class: "item",
+      qualities: qualities,
+      parent: player.controlBar.el_
     });
 
+    player.play();
+
+    function createAutoQualityButton(params) {
+      let button = document.createElement("div");
+      button.id = "auto";
+      button.innerText = "Auto";
+      button.classList.add("selected", params.class);
+
+      button.addEventListener("click", () => {
+        removeSelected(params);
+        button.classList.add("selected");
+        qualities.forEach(quality => quality.enabled(true));
+      });
+
+      return button;
+    }
+
+    function createQualityButtons(params) {
+      let contentMenu = document.createElement('div');
+      let menu = document.createElement('div');
+      let icon = document.createElement('div');
+      let fullscreen = params.parent.querySelector('.vjs-fullscreen-control');
+
+      contentMenu.appendChild(icon);
+      contentMenu.appendChild(menu);
+      fullscreen.before(contentMenu);
+
+      menu.classList.add('menu');
+      icon.classList.add('icon', 'vjs-icon-cog');
+      contentMenu.classList.add('contentMenu');
+
+      let autoButton = createAutoQualityButton(params);
+      menu.appendChild(autoButton);
+
+      qualities.sort((a, b) => a.height - b.height);
+      qualities.forEach(quality => {
+        let button = document.createElement("div");
+        button.classList.add(params.class);
+        button.id = `${quality.height}`;
+        button.innerText = `${quality.height}p`;
+
+        button.addEventListener("click", () => {
+          resetQuality(params);
+          button.classList.add("selected");
+          quality.enabled(true);
+        });
+
+        menu.appendChild(button);
+      });
+
+      setInterval(() => {
+        let auto = document.querySelector("#auto");
+        let current = player.tech({ IWillNotUseThisInPlugins: true }).vhs.selectPlaylist().attributes.RESOLUTION.height;
+        auto.innerHTML = auto.classList.contains("selected")
+          ? `Auto <span class='current'>${current}p</span>`
+          : "Auto";
+      }, 1000);
+    }
+
+    function removeSelected(params) {
+      document.querySelector("#auto").classList.remove("selected");
+      document.querySelectorAll(`.${params.class}`).forEach(quality => quality.classList.remove("selected"));
+    }
+
+    function resetQuality(params) {
+      removeSelected(params);
+      params.qualities.forEach(quality => quality.enabled(false));
+    }
+    var tracks = player.textTracks(); // Obter todas as pistas de legenda
+        for (var i = 0; i < tracks.length; i++) {
+          player.removeRemoteTextTrack(tracks[i]); // Remover cada pista de legenda
+        }
+  });
+});
     function jumpToTime(time) {
         player.currentTime(time);
         player.play();
     }
     document.addEventListener('DOMContentLoaded', function () {
 
-        // Carregar a transcrição automaticamente ao iniciar o vídeo
-        player.ready(function () {
-            document.querySelector('.vjs-transcribe .vjs-transcribe-btn').click();
+        // // Carregar a transcrição automaticamente ao iniciar o vídeo
+        // player.ready(function () {
+        //     document.querySelector('.vjs-transcribe .vjs-transcribe-btn').click();
 
-        });
+        // });
 
         videojs(document.querySelector('.video-js')).disablePictureInPicture();
 
@@ -520,79 +212,6 @@ body {
   <script>
     (function () {
             "use strict";
-
-            // horizontal direction
-            (function resizableX() {
-                const resizer = document.querySelector(".resizer-x");
-                resizer.addEventListener("mousedown", onmousedown);
-                resizer.addEventListener("touchstart", ontouchstart);
-
-                // for mobile
-                function ontouchstart(e) {
-                    e.preventDefault();
-                    resizer.addEventListener("touchmove", ontouchmove);
-                    resizer.addEventListener("touchend", ontouchend);
-                }
-                function ontouchmove(e) {
-                    e.preventDefault();
-                    const clientX = e.touches[0].clientX;
-                    const deltaX = clientX - (resizer._clientX || clientX);
-                    resizer._clientX = clientX;
-                    const l = resizer.previousElementSibling;
-                    const r = resizer.nextElementSibling;
-                    // LEFT
-                    if (deltaX < 0) {
-                        const w = Math.round(parseInt(getComputedStyle(l).width) + deltaX);
-                        l.style.flex = `0 ${w < 10 ? 0 : w}px`;
-                        r.style.flex = "1 0";
-                    }
-                    // RIGHT
-                    if (deltaX > 0) {
-                        const w = Math.round(parseInt(getComputedStyle(r).width) - deltaX);
-                        r.style.flex = `0 ${w < 10 ? 0 : w}px`;
-                        l.style.flex = "1 0";
-                    }
-                }
-                function ontouchend(e) {
-                    e.preventDefault();
-                    resizer.removeEventListener("touchmove", ontouchmove);
-                    resizer.removeEventListener("touchend", ontouchend);
-                    delete e._clientX;
-                }
-
-                // for desktop
-                function onmousedown(e) {
-                    e.preventDefault();
-                    document.addEventListener("mousemove", onmousemove);
-                    document.addEventListener("mouseup", onmouseup);
-                }
-                function onmousemove(e) {
-                    e.preventDefault();
-                    const clientX = e.clientX;
-                    const deltaX = clientX - (resizer._clientX || clientX);
-                    resizer._clientX = clientX;
-                    const l = resizer.previousElementSibling;
-                    const r = resizer.nextElementSibling;
-                    // LEFT
-                    if (deltaX < 0) {
-                        const w = Math.round(parseInt(getComputedStyle(l).width) + deltaX);
-                        l.style.flex = `0 ${w < 10 ? 0 : w}px`;
-                        r.style.flex = "1 0";
-                    }
-                    // RIGHT
-                    if (deltaX > 0) {
-                        const w = Math.round(parseInt(getComputedStyle(r).width) - deltaX);
-                        r.style.flex = `0 ${w < 10 ? 0 : w}px`;
-                        l.style.flex = "1 0";
-                    }
-                }
-                function onmouseup(e) {
-                    e.preventDefault();
-                    document.removeEventListener("mousemove", onmousemove);
-                    document.removeEventListener("mouseup", onmouseup);
-                    delete e._clientX;
-                }
-            })();
 
             // vertical direction
             (function resizableY() {
@@ -642,8 +261,14 @@ body {
                 function onmousemove(e) {
                     e.preventDefault();
                     const clientY = e.clientY;
-                    const deltaY = clientY - (resizer._clientY || clientY);
-                    resizer._clientY = clientY;
+                    let deltaY
+                    if(clientY > 9 && clientY < window.innerHeight - 9){
+                        deltaY = clientY - (resizer._clientY || clientY);
+                        resizer._clientY = clientY;
+                    }else{
+                        deltaY = 0
+                    }
+                    
                     const t = resizer.previousElementSibling;
                     const b = resizer.nextElementSibling;
                     // UP
@@ -667,7 +292,6 @@ body {
                 }
             })();
         })();
-
 
   </script>
 </body>
