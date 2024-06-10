@@ -323,7 +323,7 @@
     downloadComponent;
     searchComponent;
     $initialParent;
-    activated = true;
+    activated = false;
     totalTracks = 0;
     constructor(player, options) {
       super(player, options);
@@ -334,8 +334,9 @@
           const Button = videojs.getComponent("Button");
           let button = new Button(player, {
             className: "vjs-transcribe-btn",
-            controlText: "Transcript",
+            controlText: "Índice/Transcrição",
             clickHandler: (event) => {
+              console.log(this.activated);
               if (!this.activated) {
                   this.createTranscript(player);
                   document.querySelector(".menu-index").classList.toggle('hidden');
