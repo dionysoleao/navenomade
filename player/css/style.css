@@ -88,6 +88,7 @@ button.vjs-transcribe-search-result:hover, button.vjs-transcribe-search-result:f
 html,
 body {
   width: 100vw;
+  font-size: 20px;
   height: 100vh;
   margin: 0;
   border: 0;
