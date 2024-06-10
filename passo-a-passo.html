@@ -1,0 +1,269 @@
+<body>
+    
+    
+    <div style="display: flex;">
+        <textarea id="htmlInput" rows="10" cols="50" style="width:400px;height:400px" placeholder="Insira o HTML aqui"></textarea><br>
+        <div style="width:400px; overflow: scroll;"class="resultado"></div>
+        <textarea id="htmlInputSubs" rows="10" cols="50" style="width:400px;height:400px" placeholder="Insira as frases aqui"></textarea><br>
+        <div style="width:400px; overflow: scroll;"class="resultado-vtt"></div>
+        <textarea id="txtInputCaps" rows="10" cols="50" style="width:400px;height:400px" placeholder="Insira os Capítulos TXT aqui"></textarea><br>
+        <div style="width:400px; overflow: scroll;"class="html-caps"></div>
+    </div>
+    <button onclick="processarHTML()">Passo 1 -  HTML -> texto minutado </button>
+    <div style="margin-left:7px">Passo 2 - Frases decupadas</div>
+    <button onclick="processarHTMLeVTT()">Passo 3 - Texto minutado e frases decupadas -> legenda VTT </button><br>
+    <button onclick="convertCaps()">Passo 4 - Capítulos TXT -> Capítulos HTML </button>
+
+    <script>
+
+        let divResultado = document.querySelector(".resultado");
+
+        // 1.
+
+        // Função para capturar todos os spans a partir de uma string HTML e retornar uma string contendo os spans
+        function capturarSpansESubstituirVariavel(htmlString) {
+            // Cria um elemento temporário para carregar o HTML da string
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlString;
+            
+            // Captura todos os elementos span no conteúdo da string
+            const spans = tempDiv.querySelectorAll('span[data-time]');
+            
+            // Cria uma string contendo o HTML de todos os spans
+            let spansHTML = '';
+            spans.forEach(span => {
+                spansHTML += span.outerHTML;
+            });
+
+            // Substitui o conteúdo da variável pelo HTML dos spans
+            return spansHTML;
+        }
+
+        // Função para processar o input do usuário e gerar o arquivo TXT
+        function processarHTML() {
+
+            // Obtém o valor do input do usuário
+            console.log("oi");
+            const htmlString = document.getElementById('htmlInput').value;
+            
+            // Processa o HTML para capturar os spans
+            const resultado = capturarSpansESubstituirVariavel(htmlString);
+            
+            divResultado.innerHTML = resultado;
+
+            // Seleciona todos os elementos <span> do documento
+                const spans = divResultado.querySelectorAll('span');
+
+            // Inicializa uma string vazia para armazenar as tags <span> com o atributo data-time
+            let spansWithDataTime = '';
+
+            // Itera sobre cada elemento <span> encontrado
+            spans.forEach(span => {
+                // Verifica se o elemento possui o atributo data-time
+                if (span.hasAttribute('data-time')) {
+                    // Adiciona a tag <span> com o atributo data-time ao texto
+                    spansWithDataTime += `<span data-time="${span.getAttribute('data-time')}">${span.textContent}</span>`;
+                }
+            });
+            divResultado.innerHTML = spansWithDataTime;
+            
+            function convertSpansToDateFormat() {
+                const spans = divResultado.querySelectorAll('span[data-time]');
+
+                spans.forEach(span => {
+                    const milliseconds = parseInt(span.dataset.time);
+                    const date = new Date(milliseconds);
+                    const formattedTime = formatTime(date);
+                    span.dataset.time = formattedTime;
+                });
+            }
+
+            function formatTime(date) {
+                const hours = date.getUTCHours().toString().padStart(2, '0');
+                const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+                const seconds = date.getUTCSeconds().toString().padStart(2, '0');
+                const milliseconds = (date.getUTCMilliseconds() % 1000).toString().padStart(3, '0');
+
+                return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+            }
+            convertSpansToDateFormat();
+
+            // Exibe as tags <span> com o atributo data-time no console
+            // // console.log(spansWithDataTime);
+            // document.body.innerHTML = spansWithDataTime
+            // // Cria um blob com o resultado
+            // const blob = new Blob([resultado], { type: 'text/plain' });
+            
+            // // Cria um link para download
+            // const link = document.createElement('a');
+            // link.href = URL.createObjectURL(blob);
+            // link.download = 'resultado.txt';
+            
+            // // Adiciona o link ao documento e clica nele para iniciar o download
+            // document.body.appendChild(link);
+            // link.click();
+            
+            // // Remove o link do documento
+            // document.body.removeChild(link);
+        }
+
+        function processarHTMLeVTT(spansDated) {
+
+            const subtitles = document.getElementById('htmlInputSubs').value;
+            spansDated = divResultado.innerHTML;
+            function createWordArrays(inputText) {
+                const lines = inputText.split('\n');
+                return lines.map(line => {
+                    const words = line.trim().split(/\s+/).map(word => word.trim());
+                    return words;
+                });
+            }
+
+            const wordArrays = createWordArrays(subtitles);
+
+            function getFirstWordPositions(wordArrays) {
+                const positions = [];
+                let currentIndex = 0;
+                wordArrays.forEach(line => {
+                    if (line.length > 0) {
+                        positions.push(currentIndex);
+                    }
+                    currentIndex += line.length;
+                });
+                return positions;
+            }
+
+            function getTimeByPosition(position, inputText) {
+                const regex = /data-time="([^"]+)">([^<]+)<\/span>/g;
+                let match;
+                let currentIndex = 0;
+                while ((match = regex.exec(inputText)) !== null) {
+                    if (currentIndex === position) {
+                        return { time: match[1], word: match[2].trim() };
+                    }
+                    currentIndex++;
+                }
+                return null;
+            }
+
+            const firstWordPositions = getFirstWordPositions(wordArrays);
+            // console.log(getTimeByPosition(firstWordPositions[0], spansDated));
+
+            
+
+            // console.log(wordArrays);
+            // console.log(spansDated);
+            function createVTT(wordArrays, inputHTML) {
+                let vtt = "WEBVTT<br><br>";
+                for (let i = 0; i < firstWordPositions.length; i++) {
+                    const startData = getTimeByPosition(firstWordPositions[i], inputHTML);
+                    console.log(startData);
+                    const startTime = startData.time;
+                    const endTime = (i < firstWordPositions.length - 1) ? getTimeByPosition(firstWordPositions[i + 1], inputHTML).time : "99:59:59.999";
+                    const lineText = wordArrays[i].join(' ');
+                    vtt += `${startTime} --> ${endTime}<br>${lineText}<br><br>`;
+                }
+                return vtt;
+            }
+
+            const vttOutput = createVTT(wordArrays, spansDated);
+            resultadovtt = document.querySelector('.resultado-vtt')
+            resultadovtt.innerHTML = vttOutput;
+        }
+
+                
+        function convertCaps() {
+
+            const input = document.getElementById('txtInputCaps').value;
+            const sections = input.split('<br><br><br>');
+            console.log(sections);
+            let output = '<ul>';
+
+                let isFirst = true;
+                sections.forEach(section => {
+                const lines = section.split('<br>');
+                const title = lines[0];
+                const details = lines.slice(1).filter(line => /\d{2}:\d{2}(?::\d{2})?/.test(line)).map(line => {
+                    const [beforeColon, time] = line.split(': ').pop().split('. ');
+                    const timeParts = time.trim().split(':');
+                    const seconds = timeParts.length === 2 ? (parseInt(timeParts[0]) * 60 + parseInt(timeParts[1])) : 
+                                (parseInt(timeParts[0]) * 3600 + parseInt(timeParts[1]) * 60 + parseInt(timeParts[2]));
+                    return `<li><a href="#" onclick="jumpToTime(${seconds})">${line.replace(/.*?:\s*/, '').trim()}</a></li>`;
+                }).join('');
+                
+                output += `<li class="${isFirst ? 'mt-6' : 'mt-4'}">
+                    <h2 class="mb-4 font-bold">${title}</h2>
+                    <ul>${details}</ul>
+                </li>`;
+                
+                isFirst = false;
+            });
+
+            output += '</ul>';
+
+            resultadovtt = document.querySelector('.html-caps')
+            resultadovtt.innerText = output;
+        }
+
+        // // Example usage
+        // convertSpansToDateFormat();
+
+        // function generateVttFromSpans() {
+        //     const spans = document.querySelectorAll('span[data-time]');
+        //     let vttContent = "WEBVTT\n\n";
+
+        //     spans.forEach((span, index) => {
+        //         const startTime = span.dataset.time;
+        //         const nextSpan = spans[index + 1];
+        //         const endTime = nextSpan ? nextSpan.dataset.time : ''; // Use a próxima marca de tempo como endTime, se existir
+
+        //         vttContent += `${startTime} --> ${endTime}\n`;
+        //         vttContent += `${span.textContent.trim()}\n\n`;
+        //     });
+
+        //     return vttContent;
+        // }
+
+        // // Example usage
+        // const spansSelector = 'span[data-time]';
+        // const vttContent = generateVttFromSpans(spansSelector);
+        // // console.log(vttContent);
+        // spansDated = document.body.innerHTML;
+
+
+
+        // // Função para capturar todos os spans e substituir o conteúdo do body
+        // function capturarSpansESubstituirBody() {
+        //     // Captura todos os elementos span no documento
+        //     const spans = document.querySelectorAll('span[data-time]');
+            
+        //     // Cria uma string contendo o HTML de todos os spans
+        //     let spansHTML = '';
+        //     spans.forEach(span => {
+        //         spansHTML += span.outerHTML;
+        //     });
+
+        //     // Substitui o conteúdo do body pelo HTML dos spans
+        //     document.body.innerHTML = spansHTML;
+        // }
+
+        // // Chama a função após carregar o conteúdo do documento
+        // document.addEventListener('DOMContentLoaded', capturarSpansESubstituirBody);
+
+
+
+        // // 2. 
+
+
+            
+
+
+        // //3.
+
+
+       
+
+        
+    </script>
+
+</body>
